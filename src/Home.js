@@ -19,7 +19,7 @@ export default class Home extends Component {
 
   postToJava = (id, name, address) => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch("http://localhost:8080/places/", {
+    fetch("https://infinite-river-88630.herokuapp.com/places/", {
       method: "post",
       headers: {
         Authorization: jwtToken,
@@ -31,7 +31,6 @@ export default class Home extends Component {
         yelpid: id,
       }),
     }).then((response) => {
-      console.log(response);
     });
   };
 

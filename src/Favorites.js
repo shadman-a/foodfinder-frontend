@@ -16,12 +16,15 @@ export default class Favorites extends Component {
 
   componentDidMount() {
     this.fetchJava();
-    console.log(sessionStorage.getItem("jwt"));
+  }
+
+  componentDidUpdate() {
+    this.fetchJava();
   }
 
   fetchJava = () => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`http://localhost:8080/places/`, {
+    fetch(`https://infinite-river-88630.herokuapp.com/places/`, {
       headers: { Authorization: jwtToken, "Content-Type": "application/json" },
     })
       .then((response) => response.json())
@@ -34,14 +37,13 @@ export default class Favorites extends Component {
 
   deleteJava = (id) => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`http://localhost:8080/places/${id}`, {
+    fetch(`https://infinite-river-88630.herokuapp.com/places/${id}`, {
       method: "DELETE",
       headers: new Headers({
         Authorization: jwtToken,
         "Content-Type": "application/json",
       }),
     });
-    this.fetchJava();
   };
 
   render() {

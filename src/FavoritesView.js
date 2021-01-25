@@ -34,7 +34,6 @@ export default class Favorites extends Component {
   };
 
   render() {
-    console.log(this.state.business);
     return (
       <div>
         <h1>{this.state.business.name}</h1>

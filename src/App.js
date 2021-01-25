@@ -40,7 +40,6 @@ export default class App extends React.Component{
         (position) => {
           let lat = position.coords.latitude
           let lng = position.coords.longitude
-          console.log("getCurrentPosition Success " + lat + lng) 
           this.setState({
             lat: lat,
             lng: lng
