@@ -16,7 +16,7 @@ export default class Favorites extends Component {
 
   fetchApi = () => {
     fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${this.props.location.state.yelp}`,
+      `https://mysterious-bayou-17398.herokuapp.com/https://api.yelp.com/v3/businesses/${this.props.location.state.yelp}`,
       {
         method: "GET",
         headers: {

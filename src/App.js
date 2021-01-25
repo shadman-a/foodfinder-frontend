@@ -53,7 +53,7 @@ export default class App extends React.Component{
   }
 
   fetchApi=()=>{
-    fetch(`https://api.yelp.com/v3/businesses/search?term=${this.state.search}&latitude=${this.state.lat}&longitude=${this.state.lng}`,{
+    fetch(`https://mysterious-bayou-17398.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${this.state.search}&latitude=${this.state.lat}&longitude=${this.state.lng}`,{
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${YELP_API_KEY}`
