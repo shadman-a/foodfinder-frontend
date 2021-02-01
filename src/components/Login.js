@@ -30,13 +30,14 @@ class Login extends Component {
     };  
 
     render() {    
-      if (sessionStorage.getItem('jwt') !== null) {    
+      if (sessionStorage.getItem('jwt') !== null) {   
           return ( <h1>Logged in</h1>  )  
+          
       }    
       else {    
           return (    
               <div id="login">    
-                  <h3 className="text-center text-white pt-5">Login form</h3>    
+                  <h3 className="text-center text-black pt-5">Login</h3>    
                   <div className="container">    
                       <div id="login-row" className="row justify-content-center align-items-center">    
                       <div id="login-column" className="col-md-6">    
@@ -47,11 +48,17 @@ class Login extends Component {
                       <div className="form-group">    
                           <input type="password" name="password" onChange={this.handleChange}  className="form-control" placeholder="password" />    
                       </div>    
-                           <input type="submit" name="submit" onClick={this.login}  className="btn btn-info btn-md" value="Login"/>    
-                       </div>    
-                      </div>    
-                      </div>    
-              </div>    
+                           <input type="submit" name="submit" onClick={this.login}  className="btn btn-info btn-md" value="Login"/> 
+                           <br/><br/>
+                           <input type="button" name="Signup" onClick={null}  className="btn btn-info btn-md" value="Signup"/>   
+   
+                       </div>   
+                      </div>   
+                      </div>   
+ 
+              </div>  
+              
+  
               </div>    
       
    );} }  

@@ -10,11 +10,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 export default class Home extends Component {
   state = {
     lng: this.props.lng,
     lat: this.props.lat,
+    showHide: false,
   };
 
   postToJava = (id, name, address) => {
@@ -30,11 +32,54 @@ export default class Home extends Component {
         address: address,
         yelpid: id,
       }),
-    }).then((response) => {
-    });
+    }).then(this.setState({
+      objName: name,
+      objLocation: address
+    }));
+    this.handleModalShowHide()
   };
 
- 
+  handleModalShowHide = () => {
+    this.setState({
+      showHide: !this.state.showHide,
+    })
+  }
+
+  modal = () => {
+    return (
+      <Modal show={this.state.showHide}>
+        <Modal.Header>
+          <Modal.Title>Would you like an email confirmation?</Modal.Title>
+        </Modal.Header>
+        {/* <Modal.Body>Would you like an email confirmation?</Modal.Body> */}
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => this.sendEmail()}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={() => this.handleModalShowHide()}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
+
+  sendEmail = () => {
+      const jwtToken = sessionStorage.getItem("jwt");
+      fetch("https://infinite-river-88630.herokuapp.com/send/", {
+      method: "post",
+      headers: {
+        Authorization: jwtToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to_address: "shadman@outlook.com",
+        subject: "FoodFinder-New Resturant Added",
+        body: `You have added ${this.state.objName} to your favorites located at ${this.state.objLocation}`
+      }),
+    }).then((response) => {});
+    this.handleModalShowHide()
+  }
 
   render() {
     const card = this.props.buisnessArray.map((obj) => (
@@ -59,16 +104,14 @@ export default class Home extends Component {
             See on yelp
           </Button>
           {sessionStorage.getItem("jwt") === null ? (
-           <Link to={{ pathname: "/login" }}>
-           <Button size="small" color="primary">
-             Log in to ❤️
-           </Button>
-         </Link>
+            <Link to={{ pathname: "/login" }}>
+              <Button size="small" color="primary">
+                Log in to ❤️
+              </Button>
+            </Link>
           ) : (
             <Button
-              onClick={() =>
-                this.postToJava(obj.id, obj.name, obj.location.address1)
-              }
+              onClick={() => this.postToJava(obj.id, obj.name, obj.location.address1)}
               size="small"
               color="primary"
             >
@@ -80,6 +123,7 @@ export default class Home extends Component {
     ));
     return (
       <>
+      {this.modal()}
         <div style={{ flexGrow: 1 }}>
           <Grid container spacing={0.5}>
             {card}
