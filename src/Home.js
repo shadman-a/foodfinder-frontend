@@ -51,7 +51,6 @@ export default class Home extends Component {
         <Modal.Header>
           <Modal.Title>Would you like an email confirmation?</Modal.Title>
         </Modal.Header>
-        {/* <Modal.Body>Would you like an email confirmation?</Modal.Body> */}
         <Modal.Footer>
           <Button variant="primary" onClick={() => this.sendEmail()}>
             Yes
