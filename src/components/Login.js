@@ -9,7 +9,8 @@ class Login extends Component {
     }
 
     handleChange = (event) => {    
-      this.setState({[event.target.name] : event.target.value});    
+      this.setState({[event.target.name] : event.target.value});  
+      console.log(this.state)  
     } 
 
     handleModalShowHide = () => {
@@ -19,8 +20,9 @@ class Login extends Component {
       }
 
       postUser = () => {
-        const newUser = {userName: this.state.username, password: this.state.password};    
-        fetch("https://infinite-river-88630.herokuapp.com/user/", {
+        const newUser = {userName: this.state.username, email: this.state.email, password: this.state.password};  
+        fetch("https://infinite-river-88630.herokuapp.com/user", {
+          credentials: 'include',  
         method: "post",
         headers: {
           "Content-Type": "application/json",
