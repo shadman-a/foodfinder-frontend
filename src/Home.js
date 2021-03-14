@@ -82,6 +82,7 @@ export default class Home extends Component {
 
   render() {
     const card = this.props.buisnessArray.map((obj) => (
+      <Grid item  >
       <Card style={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
@@ -119,15 +120,14 @@ export default class Home extends Component {
           )}
         </CardActions>
       </Card>
+      </Grid>
     ));
     return (
       <>
       {this.modal()}
-        <div style={{ flexGrow: 1 }}>
-          <Grid container spacing={0.5}>
+          <Grid container spacing={1}>
             {card}
           </Grid>
-        </div>
       </>
     );
   }
