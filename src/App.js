@@ -73,10 +73,6 @@ export default class App extends React.Component{
     this.setState({ search: event.target.value }); 
   };
 
-  logout = () => {
-    sessionStorage.clear();
-    window.location.reload();
-  }
 
   render() {
   return (
@@ -88,7 +84,7 @@ export default class App extends React.Component{
       <Nav.Link href="/map">Map</Nav.Link>
       <Nav.Link href="/favorites">Favorites</Nav.Link>
       {sessionStorage.getItem("jwt") === null ? 
-      <Nav.Link href="/login">Log In</Nav.Link> : <Nav.Link onClick={()=>this.logout() }>Log Out</Nav.Link>}
+      <Nav.Link href="/login">Log In</Nav.Link> : <Nav.Link href="/login">{sessionStorage.getItem("username")}</Nav.Link>}
     </Nav>
     <Form inline>
       <Form.Control type="text" placeholder="Search" className="mr-sm-2" 

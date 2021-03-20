@@ -47,7 +47,9 @@ export default class Favorites extends Component {
   };
 
   render() {
-    const favoriteList = this.state.business.map((obj) => (
+    const favoriteList = this.state.business.map((obj) => {
+      if (obj.user === sessionStorage.getItem('username')) 
+        return (
       <ListItem>
         <ListItemText primary={obj.name} secondary={obj.address} />
         <Link
@@ -69,8 +71,8 @@ export default class Favorites extends Component {
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
-      </ListItem>
-    ));
+      </ListItem>)
+           else return (null)})
     if (sessionStorage.getItem("jwt") === null) {
       return <h1>Please Log in to see Favorites</h1>;
     } else {

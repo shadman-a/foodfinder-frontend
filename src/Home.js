@@ -31,6 +31,7 @@ export default class Home extends Component {
         name: name,
         address: address,
         yelpid: id,
+        user: sessionStorage.getItem('username')
       }),
     }).then(this.setState({
       objName: name,
@@ -72,7 +73,7 @@ export default class Home extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        to_address: "shadman@outlook.com",
+        to_address: sessionStorage.getItem('username'),
         subject: "FoodFinder-New Resturant Added",
         body: `You have added ${this.state.objName} to your favorites located at ${this.state.objLocation}`
       }),
