@@ -26,8 +26,8 @@ export default class App extends React.Component{
     search: "",
     locationSearch: "",
     buisnessArray: [],
-    lng: -122.431297,
-    lat: 37.773972,
+    lng: -73.935242,
+    lat: 40.730610,
   };
 
   componentDidMount(){
