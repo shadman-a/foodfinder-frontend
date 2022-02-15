@@ -50,6 +50,7 @@ export default class App extends React.Component{
         },
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
       );
+      this.fetchApi();
   }
 
   fetchApi=()=>{
