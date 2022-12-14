@@ -24,7 +24,7 @@ export default class Favorites extends Component {
 
   fetchJava = () => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`https://infinite-river-88630.herokuapp.com/places/`, {
+    fetch(`http://localhost:8081/places/`, {
       headers: { Authorization: jwtToken, "Content-Type": "application/json" },
     })
       .then((response) => response.json())
@@ -37,7 +37,7 @@ export default class Favorites extends Component {
 
   deleteJava = (id) => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`https://infinite-river-88630.herokuapp.com/places/${id}`, {
+    fetch(`http://localhost:8081/places/${id}`, {
       method: "DELETE",
       headers: new Headers({
         Authorization: jwtToken,
