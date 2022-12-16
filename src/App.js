@@ -17,9 +17,6 @@ import Form from 'react-bootstrap/Form'
 import Login from './components/Login';
 
 
-
-const YELP_API_KEY = process.env.REACT_APP_YELP_API_KEY;
-
 export default class App extends React.Component{
 
   state = {
@@ -30,10 +27,10 @@ export default class App extends React.Component{
     lat: 40.730610,
   };
 
-  // componentDidMount(){
-  //   this.getLocation()
-  //   this.fetchApi()
-  // }
+  componentDidMount(){
+    this.getLocation()
+    this.fetchApi()
+  }
 
   getLocation=()=>{
     navigator.geolocation.getCurrentPosition(
@@ -54,11 +51,16 @@ export default class App extends React.Component{
   }
 
   fetchApi=()=>{
-    fetch(`https://api.yelp.com/v3/businesses/search?term=${this.state.search}&latitude=${this.state.lat}&longitude=${this.state.lng}`,{
-        method: 'GET',
+    fetch(`http://localhost:8081/yelp`,{
+        method: 'POST',
         headers: {
-            "Authorization": `Bearer ${YELP_API_KEY}`
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          term: this.state.search.replace(/\s/g, ''),
+          lat: this.state.lat,
+          long: this.state.lng
+        }),
         redirect: 'follow'
     })
     .then(response => response.json())
