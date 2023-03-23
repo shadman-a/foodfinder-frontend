@@ -15,7 +15,7 @@ export default class Favorites extends Component {
 
   fetchApi = () => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`http://localhost:8081/singlePlace`,{
+    fetch(`https://foodfinder-backend.onrender.com/singlePlace`,{
         method: 'POST',
         headers: {
           Authorization: jwtToken,

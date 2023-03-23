@@ -51,7 +51,7 @@ export default class App extends React.Component{
   }
 
   fetchApi=()=>{
-    fetch(`http://localhost:8081/yelp`,{
+    fetch(`https://foodfinder-backend.onrender.com/yelp`,{
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
