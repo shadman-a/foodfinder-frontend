@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card'
 
 
 
-const YELP_API_KEY = process.env.REACT_APP_YELP_API_KEY;
 
 export default class Favorites extends Component {
   state = {
@@ -15,16 +14,18 @@ export default class Favorites extends Component {
   }
 
   fetchApi = () => {
-    fetch(
-      `https://api.yelp.com/v3/businesses/${this.props.location.state.yelp}`,
-      {
-        method: "GET",
+    const jwtToken = sessionStorage.getItem("jwt");
+    fetch(`http://localhost:8081/singlePlace`,{
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${YELP_API_KEY}`,
+          Authorization: jwtToken,
+          "Content-Type": "application/json",
         },
-        redirect: "follow",
-      }
-    )
+        body: JSON.stringify({
+          id: this.props.location.state.yelp
+        }),
+        redirect: 'follow'
+    })
       .then((response) => response.json())
       .then((result) =>
         this.setState({
