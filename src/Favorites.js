@@ -18,9 +18,9 @@ export default class Favorites extends Component {
     this.fetchJava();
   }
 
-  componentDidUpdate() {
-    this.fetchJava();
-  }
+  // componentDidUpdate() {
+  //   this.fetchJava();
+  // }
 
   fetchJava = () => {
     const jwtToken = sessionStorage.getItem("jwt");
