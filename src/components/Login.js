@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Modal } from "react-bootstrap";
-import { Button } from "@mui/material";
+import { Button } from "@material-ui/core";
 
 class Login extends Component {
     constructor(props) {
