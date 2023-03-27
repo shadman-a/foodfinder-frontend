@@ -62,18 +62,18 @@ export default function App() {
     );
   }
 
-  const fetchApi = () => {
-    fetch(`http://localhost:8081/yelp`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        term: search.replace(/\s/g, ''),
-        lat: lat,
-        long: lng
-      }),
-      redirect: 'follow'
+  fetchApi=()=>{
+    fetch(`https://foodfinder-backend.onrender.com/yelp`,{
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          term: this.state.search.replace(/\s/g, ''),
+          lat: this.state.lat,
+          long: this.state.lng
+        }),
+        redirect: 'follow'
     })
       .then(response => response.json())
       .then(result => {
