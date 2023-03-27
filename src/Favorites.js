@@ -18,13 +18,13 @@ export default class Favorites extends Component {
     this.fetchJava();
   }
 
-  // componentDidUpdate() {
-  //   this.fetchJava();
-  // }
+  componentDidUpdate() {
+    this.fetchJava();
+  }
 
   fetchJava = () => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`https://foodfinder-backend.onrender.com/places/`, {
+    fetch(`http://localhost:8081/places/`, {
       headers: { Authorization: jwtToken, "Content-Type": "application/json" },
     })
       .then((response) => response.json())
@@ -37,7 +37,7 @@ export default class Favorites extends Component {
 
   deleteJava = (id) => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`https://foodfinder-backend.onrender.com/places/${id}`, {
+    fetch(`http://localhost:8081/places/${id}`, {
       method: "DELETE",
       headers: new Headers({
         Authorization: jwtToken,
