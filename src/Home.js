@@ -8,7 +8,7 @@ import {
   Button,
   Grid,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
@@ -83,28 +83,29 @@ export default class Home extends Component {
 
   render() {
     const card = this.props.buisnessArray.map((obj) => (
-      <Grid item  >
-      <Card style={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            style={{ height: 140 }}
-            image={obj.image_url}
-            title={obj.name}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {obj.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {obj.location.address1}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button href={obj.url} size="small" color="primary">
+      <Grid item xs={12} sm={6} md={4} key={obj.id}>
+      <Card sx={{ maxWidth: 350 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image={obj.image_url}
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+          {obj.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {obj.location.address1}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+      <Button href={obj.url} size="small" color="primary">
             See on yelp
-          </Button>
-          {sessionStorage.getItem("jwt") === null ? (
+      </Button>
+        {sessionStorage.getItem("jwt") === null ? (
             <Link to={{ pathname: "/login" }}>
               <Button size="small" color="primary">
                 Log in to ❤️
@@ -119,14 +120,15 @@ export default class Home extends Component {
               Add to favorites
             </Button>
           )}
-        </CardActions>
-      </Card>
-      </Grid>
-    ));
+      </CardActions>
+    </Card>
+    </Grid>
+      )
+    );
     return (
       <>
       {this.modal()}
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             {card}
           </Grid>
       </>

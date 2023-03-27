@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Button } from "@material-ui/core";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import ListItemText from "@mui/material/ListItemText";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default class Favorites extends Component {
