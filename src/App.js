@@ -62,7 +62,7 @@ export default function App() {
     );
   }
 
-  fetchApi=()=>{
+  const fetchApi=()=>{
     fetch(`https://foodfinder-backend.onrender.com/yelp`,{
         method: 'POST',
         headers: {
