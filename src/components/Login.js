@@ -21,7 +21,7 @@ class Login extends Component {
       postUser = () => {
         const newUser = {userName: this.state.username, password: this.state.password};  
         this.setState({newUser: true})
-        fetch("http://localhost:8081/user", {
+        fetch(this.props.url + "user", {
           credentials: 'include',  
         method: "post",
         headers: {
@@ -69,7 +69,7 @@ class Login extends Component {
     
     login = () => {    
       const user = {userName: this.state.username, password: this.state.password};    
-      fetch("http://localhost:8081/login", {    
+      fetch(this.props.url + "login", {    
           method: 'POST',    
           body: JSON.stringify(user)    
       })    
@@ -97,7 +97,7 @@ class Login extends Component {
     }
 
     sendEmail = (username, jwtToken) => {
-      fetch("http://localhost:8081/send/", {
+      fetch(this.props.url + "send", {
       method: "post",
       headers: {
         Authorization: jwtToken,

@@ -21,7 +21,7 @@ export default class Home extends Component {
 
   postToJava = (id, name, address) => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch("http://localhost:8081/places/", {
+    fetch(this.props.url + "places", {
       method: "post",
       headers: {
         Authorization: jwtToken,
@@ -66,7 +66,7 @@ export default class Home extends Component {
 
   sendEmail = () => {
       const jwtToken = sessionStorage.getItem("jwt");
-      fetch("http://localhost:8081/send/", {
+      fetch(this.props.url + "send", {
       method: "post",
       headers: {
         Authorization: jwtToken,

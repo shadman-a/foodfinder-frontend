@@ -18,13 +18,9 @@ export default class Favorites extends Component {
     this.fetchJava();
   }
 
-  componentDidUpdate() {
-    this.fetchJava();
-  }
-
   fetchJava = () => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`http://localhost:8081/places/`, {
+    fetch(this.props.url + `places`, {
       headers: { Authorization: jwtToken, "Content-Type": "application/json" },
     })
       .then((response) => response.json())
@@ -37,7 +33,7 @@ export default class Favorites extends Component {
 
   deleteJava = (id) => {
     const jwtToken = sessionStorage.getItem("jwt");
-    fetch(`http://localhost:8081/places/${id}`, {
+    fetch(this.props.url + `places/${id}`, {
       method: "DELETE",
       headers: new Headers({
         Authorization: jwtToken,

@@ -40,6 +40,8 @@ export default function App() {
     },
   }));
 
+  const url = "http://localhost:8081/";
+
   useEffect(() => {
     getLocation();
     fetchApi();
@@ -61,7 +63,7 @@ export default function App() {
   }
 
   const fetchApi = () => {
-    fetch(`http://localhost:8081/yelp`, {
+    fetch(url + `yelp`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -150,11 +152,11 @@ export default function App() {
     </Toolbar>
   </AppBar>
   <Toolbar />
-  <Route exact path="/" render={() => <Home lng={lng} lat={lat} buisnessArray={buisnessArray} />} />
-  <Route exact path="/map" render={() => <Mapa lng={lng} lat={lat} buisnessArray={buisnessArray} />} />
-  <Route exact path="/favorites" render={() => <Favorites />} />
-  <Route exact path="/fav" component={FavoritesView} />
-  <Route exact path="/login" component={Login} />
+  <Route exact path="/" render={() => <Home lng={lng} lat={lat} buisnessArray={buisnessArray} url={url}/>} />
+  <Route exact path="/map" render={() => <Mapa lng={lng} lat={lat} buisnessArray={buisnessArray} url={url}/>} />
+  <Route exact path="/favorites" render={() => <Favorites url={url}/>} />
+  <Route exact path="/fav" render={() => <FavoritesView url={url}/>} />
+  <Route exact path="/login" render={() => <Login url={url}/>} />
 </Router>
 <BottomNavigation
   showLabels
