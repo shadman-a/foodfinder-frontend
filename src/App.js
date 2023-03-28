@@ -40,7 +40,7 @@ export default function App() {
     },
   }));
 
-  const url = "http://localhost:8081/";
+  const url = "https://foodfinder-backend.onrender.com/";
 
   useEffect(() => {
     getLocation();
