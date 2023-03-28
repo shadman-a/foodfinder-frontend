@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import {
-  Paper,
   Button,
+  InputBase,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
 } from "@mui/material";
+
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-
 
 import { FaLocationArrow } from 'react-icons/fa'
 
@@ -21,14 +25,8 @@ import Mapa from './Map'
 import FavoritesView from './FavoritesView'
 import Login from './components/Login';
 
-import Form from 'react-bootstrap/Form'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -45,7 +43,7 @@ export default function App() {
   useEffect(() => {
     getLocation();
     fetchApi();
-  });
+  }, []);
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -90,60 +88,82 @@ export default function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <>
-        <div>
-        <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            🍔Food Finder
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <div className="mr-auto">
-              <Button href="/">Home</Button>
-              <Button  href="/map">Map</Button >
-              <Button  href="/favorites">Favorites</Button >
+        <Router>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                <Link to="/" style={{color: "white", textDecoration: "none"}}>
+                  🍔Food Finder
+                </Link>
+              </Typography>
+              <Button color="inherit">
+                <Link to="/map" style={{color: "white", textDecoration: "none"}}>
+                  Map
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link to="/favorites" style={{color: "white", textDecoration: "none"}}>
+                  Favorites
+                </Link>
+              </Button>
               {sessionStorage.getItem("jwt") === null ?
-                <Button  href="/login">Log In</Button > : <Button  href="/login">{sessionStorage.getItem("username")}</Button>}
-            </div>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          </Box>
-          <Form inline>
-              <Form.Control type="text" placeholder="Search" className="mr-sm-2"
-                value={search}
-                onChange={(event) => handleChange(event)} />
-              <Button variant="outline-info" onClick={() => fetchApi()}>Search</Button>
-              <Button>
-                <FaLocationArrow onClick={() => getLocation()} style={{
-                  fontSize: 16}}  />
-                  </Button>
-                </Form>
-        </Toolbar>
-      </AppBar>
-    </Box>
-              <Router>
-                <Route exact path="/" render={() => <Home lng={lng} lat={lat} buisnessArray={buisnessArray} />} />
-                <Route exact path="/map" render={() => <Mapa lng={lng} lat={lat} buisnessArray={buisnessArray} />} />
-                <Route exact path="/favorites" render={() => <Favorites />} />
-                <Route exact path="/fav" component={FavoritesView} />
-                <Route exact path="/login" component={Login} />
-              </Router>
-            </div>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-            <BottomNavigation
-              showLabels
-            >
-              <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-              <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-              <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-            </BottomNavigation>
-            </Paper>
-          </>
-        </ThemeProvider>
-      );
-    }
-    
+                <Button color="inherit">
+                  <Link to="/login" style={{color: "white", textDecoration: "none"}}>
+                    Log In
+                  </Link>
+                </Button>
+          : <Button color="inherit">
+          <Link to="/login" style={{color: "white", textDecoration: "none"}}>
+            {sessionStorage.getItem("username")}
+          </Link>
+        </Button>}
+      <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <InputBase
+          placeholder="Search"
+          value={search}
+          onChange={(event) => handleChange(event)}
+          sx={{ ml: 1, color: 'inherit', flexGrow: 1 }}
+        />
+        <IconButton onClick={() => fetchApi()} sx={{ p: '10px' }} color="inherit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M10.706 2.292c-2.681 2.681-2.681 7.025 0 9.706s7.025 2.681 9.706 0c2.681-2.681 2.681-7.025 0-9.706s-7.025-2.681-9.706 0zm.708 8.998c-1.941 0-3.5-1.559-3.5-3.5s1.559-3.5 3.5-3.5 3.5 1.559 3.5 3.5-1.559 3.5-3.5 3.5z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+        </IconButton>
+        <IconButton onClick={() => getLocation()} sx={{ p: '10px' }} color="inherit">
+          <FaLocationArrow style={{ fontSize: 16 }} />
+        </IconButton>
+      </Box>
+      <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          sx={{ mr: 2 }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M4 18h16v-2H4v2zm0-5h16v-2H4v2zm0-7v2h16V6H4z"/>
+          </svg>
+        </IconButton>
+      </Box>
+    </Toolbar>
+  </AppBar>
+  <Toolbar />
+  <Route exact path="/" render={() => <Home lng={lng} lat={lat} buisnessArray={buisnessArray} />} />
+  <Route exact path="/map" render={() => <Mapa lng={lng} lat={lat} buisnessArray={buisnessArray} />} />
+  <Route exact path="/favorites" render={() => <Favorites />} />
+  <Route exact path="/fav" component={FavoritesView} />
+  <Route exact path="/login" component={Login} />
+</Router>
+<BottomNavigation
+  showLabels
+>
+  <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+  <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+  <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+</BottomNavigation>
+</>
+</ThemeProvider>
+  )
+}
